@@ -13,12 +13,15 @@ namespace RoseOrDaisyImageRecognitionApp.Controllers
         [HttpGet("test-2")]
         public async Task<IActionResult> Test2Async()
         {
-            var psi = new ProcessStartInfo("cmd.exe");
+            var psi = new ProcessStartInfo();
+            psi.FileName = "cmd.exe";
             psi.UseShellExecute = true;
-            var path = "D:\\Moje\\RoseOrDaisyImageRecognitionApp\\RoseOrDaisyImageRecognitionApp\\Data\\test.py";
-            psi.Arguments = $"/c py { path }";
+            psi.Arguments = "/k py D:\\Moje\\RoseOrDaisyImageRecognitionApp\\RoseOrDaisyImageRecognitionApp\\Data\\test.py";
 
-            Process.Start(psi);
+            var process = new Process();
+            process.StartInfo = psi;
+            process.Start();
+            process.WaitForExit();
 
             return Ok();
         }
