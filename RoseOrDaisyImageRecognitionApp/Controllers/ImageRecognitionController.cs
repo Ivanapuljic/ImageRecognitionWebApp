@@ -10,6 +10,19 @@ namespace RoseOrDaisyImageRecognitionApp.Controllers
     {
         #region Methods
 
+        [HttpGet("test-2")]
+        public async Task<IActionResult> Test2Async()
+        {
+            var psi = new ProcessStartInfo("cmd.exe");
+            psi.UseShellExecute = true;
+            var path = "D:\\Moje\\RoseOrDaisyImageRecognitionApp\\RoseOrDaisyImageRecognitionApp\\Data\\test.py";
+            psi.Arguments = $"/c py { path }";
+
+            Process.Start(psi);
+
+            return Ok();
+        }
+
         [HttpGet("test")]
         public async Task<IActionResult> TestAsync()
         {
