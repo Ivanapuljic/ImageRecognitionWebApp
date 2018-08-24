@@ -17,12 +17,12 @@ namespace RoseOrDaisyImageRecognitionApp.Controllers
             psi.FileName = "cmd.exe";
             psi.UseShellExecute = false;
             psi.RedirectStandardOutput = true;
-            psi.Arguments = "/c py D:\\Faks\\DRC2sem\\RUAP\\Project\\RoseOrDaisyImageRecognitionApp\\Data\\test.py";
+            psi.Arguments = "/c py D:\\Faks\\DRC2sem\\RUAP\\Project\\Classification\\result.py";
 
             var process = new Process();
             process.StartInfo = psi;
             process.Start();
-            string output = process.StandardOutput.ReadToEnd();
+            string output = await process.StandardOutput.ReadToEndAsync();
 
             process.WaitForExit();
 

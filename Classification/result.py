@@ -20,9 +20,9 @@ model.add(Dense(units = 128, activation = 'relu'))
 model.add(Dense(units = 1, activation = 'sigmoid'))
 # Compiling the CNN
 model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
-model.load_weights('models/CNN.h5')
+model.load_weights('D:\Faks\DRC2sem\RUAP\Project\Classification\models\CNN.h5')
 
-test_image = image.load_img('picture.jpg', target_size = (64, 64))
+test_image = image.load_img('D:\Faks\DRC2sem\RUAP\Project\Classification\picture.jpg', target_size = (64, 64))
 test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis = 0)
 result = model.predict(test_image)
