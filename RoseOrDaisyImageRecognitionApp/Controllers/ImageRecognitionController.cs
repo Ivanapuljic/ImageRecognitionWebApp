@@ -15,15 +15,18 @@ namespace RoseOrDaisyImageRecognitionApp.Controllers
         {
             var psi = new ProcessStartInfo();
             psi.FileName = "cmd.exe";
-            psi.UseShellExecute = true;
-            psi.Arguments = "/k py D:\\Moje\\RoseOrDaisyImageRecognitionApp\\RoseOrDaisyImageRecognitionApp\\Data\\test.py";
+            psi.UseShellExecute = false;
+            psi.RedirectStandardOutput = true;
+            psi.Arguments = "/c py D:\\Faks\\DRC2sem\\RUAP\\Project\\RoseOrDaisyImageRecognitionApp\\Data\\test.py";
 
             var process = new Process();
             process.StartInfo = psi;
             process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+
             process.WaitForExit();
 
-            return Ok();
+            return Ok(output);
         }
 
         [HttpGet("test")]
