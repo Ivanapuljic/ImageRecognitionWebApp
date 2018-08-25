@@ -3,7 +3,8 @@ import { FileUploadService } from '../services/file-upload.service';
 
 @Component({
   selector: 'app-image-upload',
-  templateUrl: 'image-upload.component.html'
+  templateUrl: 'image-upload.component.html',
+  styleUrls: ['image-upload.component.scss']
 })
 
 export class ImageUploadComponent implements OnInit {
