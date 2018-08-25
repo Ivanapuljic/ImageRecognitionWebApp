@@ -1,17 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace RoseOrDaisyImageRecognitionApp.Controllers
 {
+    /// <summary>
+    /// Image recognition REST api controller.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Route("api/image")]
     public class ImageRecognitionController : Controller
     {
         #region Methods
 
-        [HttpGet("test-2")]
-        public async Task<IActionResult> Test2Async()
+        /// <summary>
+        /// Uploads the asynchronous.
+        /// </summary>
+        /// <param name="image">The image.</param>
+        /// <returns></returns>
+        [HttpPost("upload")]
+        public async Task<IActionResult> UploadAsync([FromForm]IFormFile image)
+        {
+            var result = "";
+            // TODO: put file path to appsettings.json
+            var filePath = "D:\\Faks\\DRC2sem\\RUAP\\Project\\Classification\\picture.jpg";
+
+            if (image.Length > 0)
+            {
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+            }
+            result = await RunScriptAsync();
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Runs the script asynchronous.
+        /// </summary>
+        /// <returns></returns>
+        private async Task<string> RunScriptAsync()
         {
             var psi = new ProcessStartInfo();
             psi.FileName = "cmd.exe";
@@ -24,39 +55,6 @@ namespace RoseOrDaisyImageRecognitionApp.Controllers
             process.Start();
             string output = await process.StandardOutput.ReadToEndAsync();
 
-            process.WaitForExit();
-
-            return Ok(output);
-        }
-
-        [HttpGet("test")]
-        public async Task<IActionResult> TestAsync()
-        {
-            var x = await RunScript();
-            return Ok(x);
-        }
-
-        private async Task<List<string>> RunScript()
-        {
-            Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = "py D:\\Moje\\RoseOrDaisyImageRecognitionApp\\RoseOrDaisyImageRecognitionApp\\Data\\test.py";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-            process.Start();
-            var output = new List<string>();
-
-            while (process.StandardOutput.Peek() > -1)
-            {
-                output.Add(process.StandardOutput.ReadLine());
-            }
-
-            while (process.StandardError.Peek() > -1)
-            {
-                output.Add(process.StandardError.ReadLine());
-            }
             process.WaitForExit();
             return output;
         }
