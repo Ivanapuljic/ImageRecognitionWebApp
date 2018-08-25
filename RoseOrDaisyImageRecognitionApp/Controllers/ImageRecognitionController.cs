@@ -23,7 +23,7 @@ namespace RoseOrDaisyImageRecognitionApp.Controllers
         [HttpPost("upload")]
         public async Task<IActionResult> UploadAsync([FromForm]IFormFile image)
         {
-            var result = "";
+            var output = "";
             // TODO: put file path to appsettings.json
             var filePath = "D:\\Faks\\DRC2sem\\RUAP\\Project\\Classification\\picture.jpg";
 
@@ -34,7 +34,9 @@ namespace RoseOrDaisyImageRecognitionApp.Controllers
                     await image.CopyToAsync(stream);
                 }
             }
-            result = await RunScriptAsync();
+            output = await RunScriptAsync();
+            var result = new RecognitionResult();
+            result.Name = output;
             return Ok(result);
         }
 
@@ -60,5 +62,10 @@ namespace RoseOrDaisyImageRecognitionApp.Controllers
         }
 
         #endregion Methods
+
+        public class RecognitionResult
+        {
+            public string Name { get; set; }
+        }
     }
 }

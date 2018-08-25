@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { FileUploadService } from './services/file-upload.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
       { path: 'image-upload', component: ImageUploadComponent }
     ])
   ],
-  providers: [],
+  providers: [FileUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
