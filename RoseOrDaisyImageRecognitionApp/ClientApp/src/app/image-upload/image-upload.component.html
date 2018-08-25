@@ -1,12 +1,19 @@
-<h2>This is a Image Upload header with nice description </h2>
+<div class="page-header">
+  <h1>Image Classification <small>Upload image of <b>Rose</b> or <b>Daisy</b></small></h1>
+</div>
 <app-spinner [isRunning]="isRequesting"></app-spinner>
-<div>
-  <label>Choose File</label>
-  <input class="test" type="file"
-         accept="image/jpg"
-         (change)="handleFileInput($event.target.files)">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Choose File</h3>
+  </div>
+  <div class="panel-body">
+    <input class="upload" type="file"
+           accept="image/jpg"
+           (change)="handleFileInput($event.target.files)">
+  </div>
 </div>
 
 <div *ngIf="result">
-  <h1>{{ result }}</h1>
+  <h2>Uploaded picture is: <b> {{ result }} </b></h2>
 </div>
