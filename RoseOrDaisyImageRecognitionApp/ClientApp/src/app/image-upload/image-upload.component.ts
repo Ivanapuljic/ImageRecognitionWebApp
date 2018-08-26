@@ -19,6 +19,7 @@ export class ImageUploadComponent implements OnInit {
   // TODO: error handling
   handleFileInput(files: FileList) {
     this.isRequesting = true;
+    this.result = null;
     const file = files.item(0);
     this.fileUploadService.postFile(file)
       .subscribe(res => {

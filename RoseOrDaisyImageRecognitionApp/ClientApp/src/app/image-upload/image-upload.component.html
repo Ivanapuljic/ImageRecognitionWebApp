@@ -1,7 +1,7 @@
 <div class="page-header">
   <h1>Image Classification <small>Upload image of <b>Rose</b> or <b>Daisy</b></small></h1>
 </div>
-<app-spinner [isRunning]="isRequesting"></app-spinner>
+
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -10,6 +10,7 @@
   <div class="panel-body">
     <input class="upload" type="file"
            accept="image/jpg"
+           [disabled]="isRequesting"
            (change)="handleFileInput($event.target.files)">
   </div>
 </div>
@@ -17,3 +18,4 @@
 <div *ngIf="result">
   <h2>Uploaded picture is: <b> {{ result }} </b></h2>
 </div>
+<app-spinner [isRunning]="isRequesting"></app-spinner>

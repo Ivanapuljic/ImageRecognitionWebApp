@@ -7,8 +7,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { FileUploadService } from './services/file-upload.service';
@@ -18,8 +16,6 @@ import { FileUploadService } from './services/file-upload.service';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     ImageUploadComponent,
     SpinnerComponent
   ],
@@ -29,8 +25,6 @@ import { FileUploadService } from './services/file-upload.service';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
       { path: 'image-upload', component: ImageUploadComponent }
     ])
   ],
